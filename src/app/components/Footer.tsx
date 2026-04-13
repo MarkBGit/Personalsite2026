@@ -27,7 +27,9 @@ export function Footer() {
                 LinkedIn
               </p>
               <a 
-                href="#" 
+                href="https://www.linkedin.com/in/itsmarkbenjamin" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white/80 hover:text-[#CC5500] transition-colors"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
@@ -39,7 +41,9 @@ export function Footer() {
                 GitHub
               </p>
               <a 
-                href="#" 
+                href="https://github.com/MarkBGit" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white/80 hover:text-[#CC5500] transition-colors"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >

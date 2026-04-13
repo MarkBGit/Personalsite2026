@@ -14,12 +14,43 @@ const transformations: Transformation[] = [
 
 export function WeaknessToStrengthSection() {
   const [sliderPosition, setSliderPosition] = useState(0); // 0 to 100
+  const [isDragging, setIsDragging] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
+  const updateSliderPosition = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>, element: HTMLDivElement) => {
+    const rect = element.getBoundingClientRect();
+    let x: number;
+    
+    if ('touches' in e) {
+      x = e.touches[0].clientX - rect.left;
+    } else {
+      x = e.clientX - rect.left;
+    }
+    
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
     setSliderPosition(percentage);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    updateSliderPosition(e, e.currentTarget);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDragging) {
+      updateSliderPosition(e, e.currentTarget);
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    updateSliderPosition(e, e.currentTarget);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    updateSliderPosition(e, e.currentTarget);
   };
 
   return (
@@ -43,8 +74,13 @@ export function WeaknessToStrengthSection() {
           {transformations.map((item, index) => (
             <div 
               key={index}
-              className="relative h-64 bg-[#1a1a1a] rounded-lg overflow-hidden cursor-ew-resize"
+              className="relative h-64 bg-[#1a1a1a] rounded-lg overflow-hidden cursor-pointer select-none"
+              onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
             >
               {/* Weakness Side (Left) */}
               <div className="absolute inset-0 flex items-center justify-start px-12">
@@ -90,7 +126,7 @@ export function WeaknessToStrengthSection() {
               {/* Instruction Text */}
               {sliderPosition < 10 && (
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/40 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
-                  Drag to reveal transformation →
+                  Tap or click to reveal strengths →
                 </div>
               )}
             </div>

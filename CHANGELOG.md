@@ -63,7 +63,7 @@ Created a 1-page personal portfolio website with a "Muted Autumn" Mid-Century Mo
 
 #### 5. Interests & Projects Section - "The Gallery"
 **File**: `/src/app/components/ProjectsSection.tsx`
-- Masonry grid layout using `react-responsive-masonry` package
+- ~~Masonry grid layout using `react-responsive-masonry` package~~ **UPDATED: Standard CSS Grid layout** (Masonry library incompatible)
 - Vertical rectangles styled as "Gig Posters" / Blue Note advertisements
 - Each card features:
   - Color-coded borders (using accent palette)
@@ -74,7 +74,7 @@ Created a 1-page personal portfolio website with a "Muted Autumn" Mid-Century Mo
   - Lift on hover (translateY effect)
   - Color overlay shift
   - "VIEW DETAILS" prompt
-- Responsive: 1-3 columns based on screen width
+- Responsive: 1-3 columns based on screen width using CSS Grid
 - Placeholder project data - ready for user content
 
 ---
@@ -130,7 +130,7 @@ Created a 1-page personal portfolio website with a "Muted Autumn" Mid-Century Mo
 
 #### Packages Used
 - **motion** (v12.23.24) - Animations and parallax effects (Framer Motion)
-- **react-responsive-masonry** (v2.7.1) - Gallery masonry layout
+- ~~**react-responsive-masonry** (v2.7.1) - Gallery masonry layout~~ **REMOVED: Incompatible with environment**
 - **lucide-react** (v0.487.0) - Play/Pause icons
 
 #### Styling Approach
